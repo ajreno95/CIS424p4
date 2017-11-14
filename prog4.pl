@@ -62,7 +62,20 @@ grandson(X,Y) :- male(X), father(F,X), mother(M,X), (father(Y,F); mother(Y, F); 
 descendant(X,Y) :- (father(Y,X); mother(Y,X)); (father(Y, F); mother(Y, F)), descendant(X, F). 
 
 
+poly_add(A,[],A).
+poly_add([],B,B).
+poly_add([A|AT],[B|BT],[R|RT]) :-
+	R is A+B,
+	poly_add(AT, BT, RT).
 
+scalar_mult([],S,[]).
+scalar_mult([L|LT],S,[R|RT]):-
+	R is S*L,
+	scalar_mult(LT,S,RT).
 
-
-
+p_mult(P,[],[]).
+p_mult([],Q,[]).
+p_mult(P,[Q|QT],R):-
+	p_mult([0.0|P], QT, R1),
+	scalar_mult(P, Q, R2),
+	poly_add(R2, R1, R).
