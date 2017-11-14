@@ -58,3 +58,11 @@ mother(doris, cath).
 sibling(X,Y) :- father(F, X), father(F, Y), male(F), mother(M, X), mother(M, Y), female(M).
 sister(X,Y) :- sibling(X, Y), female(X). 
 uncle(X,Y) :- father(F,Y), mother(M,Y), father(X, C), mother(S, C), (sibling(X, F); sibling(X, M); sibling(S, F); sibling(S, M)).
+grandson(X,Y) :- male(X), father(F,X), mother(M,X), (father(Y,F); mother(Y, F); father(Y, M); mother(Y, M)).
+
+
+
+
+
+
+
