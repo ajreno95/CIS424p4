@@ -53,7 +53,7 @@ mother(doris, cath).
 
 
 
-
+%Problem 1
 
 sibling(X,Y) :- 
 	father(F, X), 
@@ -77,6 +77,8 @@ grandson(X,Y) :- male(X), father(F,X), mother(M,X), (father(Y,F); mother(Y, F); 
 descendant(X,Y) :- (father(Y,X); mother(Y,X)); (father(Y, F); mother(Y, F)), descendant(X, F). 
 
 
+%problem 2
+
 poly_add(A,[],A).
 poly_add([],B,B).
 poly_add([A|AT],[B|BT],[R|RT]) :-
@@ -94,3 +96,21 @@ p_mult(P,[Q|QT],R):-
 	p_mult([0.0|P], QT, R1),
 	scalar_mult(P, Q, R2),
 	poly_add(R2, R1, R).
+
+%Problem 3
+
+match(H, [H|T], T).
+
+nonterminalZ(Input, Result):-
+	(match(c, Input, NewResult), nonterminalZ(NewResult, Result));
+	match(c, Input, Result).
+nonterminalY(Input, Result):-
+	(match(b, Input, NewResult), nonterminalY(NewResult, Result));
+	match(b, Input, Result).
+nonterminalX(Input, Result):-
+	(match(a, Input, NewResult), nonterminalX(NewResult, Result));
+	match(a, Input, Result).
+s(Input, Result):-
+	nonterminalX(Input, FirstResult),
+	nonterminalY(FirstResult, SecondResult),
+	nonterminalZ(SecondResult, Result),!.
