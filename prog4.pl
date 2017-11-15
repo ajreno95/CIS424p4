@@ -68,13 +68,13 @@ poly_add([A|AT],[B|BT],[R|RT]) :-
 	R is A+B,
 	poly_add(AT, BT, RT).
 
-scalar_mult([],S,[]).
+scalar_mult([],_,[]).
 scalar_mult([L|LT],S,[R|RT]):-
 	R is S*L,
 	scalar_mult(LT,S,RT).
 
-p_mult(P,[],[]).
-p_mult([],Q,[]).
+p_mult(_,[],[]).
+p_mult([],_,[]).
 p_mult(P,[Q|QT],R):-
 	p_mult([0.0|P], QT, R1),
 	scalar_mult(P, Q, R2),
