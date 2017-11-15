@@ -122,3 +122,23 @@ s(Input, Result):-
 	nonterminalX(Input, FirstResult),
 	nonterminalY(FirstResult, SecondResult),
 	nonterminalZ(SecondResult, Result),!.
+
+%problem 4
+
+over35([clinton, obama, kerry, hclinton]).
+alive([clinton, obama, kerry, hclinton]).
+notFormerPresident([kerry, hclinton]).
+democrats([clinton, obama, kerry, hclinton]).
+
+tests(Candidate):-
+	(notFormerPresident(NFPList), member(Candidate, NFPList)),
+	(alive(AliveList), member(Candidate, AliveList)),
+	(over35(O35List), member(Candidate, O35List)).
+	
+member(Element, [Element | _]).
+member(Element, [_ | List]):-
+	member(Element, List).
+	
+dem_candidate(Candidate):-
+	democrats(DemList), member(Candidate, DemList), 
+	tests(Candidate).
