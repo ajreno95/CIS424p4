@@ -65,6 +65,7 @@ sibling(X,Y) :-
 sister(X,Y) :- 
 	sibling(X, Y), 
 	female(X). 
+
 uncle(X,Y) :-
 	father(F, Y),
 	mother(M, Y),
@@ -72,9 +73,16 @@ uncle(X,Y) :-
 	mother(S, C),
 	(sibling(X, F); sibling(X, M); sibling(S, F); sibling(S, M)).
 
+grandson(X,Y) :- 
+	male(X), 
+	father(F,X), 
+	mother(M,X), 
+	(father(Y,F); mother(Y, F); father(Y, M); mother(Y, M)).
 
-grandson(X,Y) :- male(X), father(F,X), mother(M,X), (father(Y,F); mother(Y, F); father(Y, M); mother(Y, M)).
-descendant(X,Y) :- (father(Y,X); mother(Y,X)); (father(Y, F); mother(Y, F)), descendant(X, F). 
+descendant(X,Y) :- 
+	(father(Y,X); mother(Y,X)); 
+	(father(Y, F); mother(Y, F)), 
+	descendant(X, F). 
 
 
 %problem 2
