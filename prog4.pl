@@ -135,7 +135,7 @@ tests(Candidate):-
 	(alive(AliveList), member(Candidate, AliveList)),
 	(over35(O35List), member(Candidate, O35List)).
 	
-member(Element, [Element | _]).
+member(Element, [Element | _]):-!.
 member(Element, [_ | List]):-
 	member(Element, List).
 	
